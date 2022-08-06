@@ -75,6 +75,18 @@ body {
     height: 6rem;
     display: block;
     margin-top: 1.4rem;
+    margin-bottom: -1rem;
+}
+
+#bloc_user_info {
+    width: 27rem;
+    margin-top: -1rem;
+    margin-bottom: 1rem;
+    
+    background-color: rgb(19, 59, 133);
+    border-radius: 0.25rem;
+    font-size: 12pt;
+    font-family: "Roboto condensed regular";
 }
 
 .button {
@@ -90,7 +102,7 @@ body {
     border-radius: 0.5rem;
     font-size: 14px;
     outline: none; 
-    margin-top: -0.2rem;
+    margin-top: 0.8rem;
 }
 .button:hover {
     background-color: rgb(47, 102, 206);
@@ -98,7 +110,7 @@ body {
     border: 1px solid rgb(255, 255, 255);
 }
 
-#p_button_1 {
+#p_button_1, #p_button_0 {
     margin-top: 0.5rem;
 }
 

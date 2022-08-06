@@ -2,7 +2,12 @@
 var isUserListVisible = false;
 var isUserListLoaded = false;
 
+var isUserInfosVisible = false;
+var isUserInfosLoaded = false;
+
 var userListData;
+var userData;
+
 const username = sessionStorage.getItem("username");
 const token = sessionStorage.getItem("authtoken");
 
@@ -19,7 +24,11 @@ function init() {
     // sert a generer le html selon les droits
 }
 
-function requestListAllUsers() {
+function requestAndDisplayUserInfos() {
+
+}
+
+function requestAndDisplayListAllUsers() {
     //console.log("clic bouton");
 
     if (!isUserListVisible) {
@@ -86,7 +95,7 @@ function displayUserList(data) {
         + "</span>" 
         + buttonHtml
         + "</article></li>";
-        console.log(string);
+        //console.log(string);
     }
     string += "</ul>";
     resultElement.innerHTML = string;

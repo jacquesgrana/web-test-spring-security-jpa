@@ -1,28 +1,21 @@
 const username = sessionStorage.getItem("username");
 const token = sessionStorage.getItem("authtoken");
-var roleData;
 
 function init() {
-    // fais requete pour obtenir le role de l'user
-
     fetch("http://localhost:8090/api/user/role/" + username, {
             method: "GET",
-            headers: { 'Authorization': 'Bearer ' + token },
-            //headers: {"Content-Type": "application/json"},  
+            headers: { 'Authorization': 'Bearer ' + token },  
             })
             .then(res => res.json())
             .then(data => {
-            roleData = data;
-            redirectByRole(roleData);
+            redirectByRoleId(data);
             })
-            .catch(err => {window.location.href="../html/error.html";})
-            ;
-    // selon role envoie sur la bonne page
+            .catch(err => {window.location.href="../html/error.html";});
 }
 
-function redirectByRole(data) {
+function redirectByRoleId(data) {
     let roleId = data.id;
-    console.log("role : " + role);
+    //console.log("id : " + roleId);
     switch (roleId) {
         case 1 :
             window.location.href="../html/menu_admin.html";

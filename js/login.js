@@ -41,18 +41,21 @@ function logRequest() {
       .then(res => res.json())
       .then(data => {
         
-
+        //console.log("data : ", data);
         if(data != null  && data.authToken != null) { // && data.authToken != null
-            //console.log("data : ", data);
+            
             let token = data.authToken;
             //console.log("token : ", token);
             sessionStorage.setItem("authtoken", token);
             window.location.href="../html/menu_selector.html";
         }
+        
         else {
-           //console.log("error data : ");
+           console.log("error data : ");
            window.location.href="../html/error.html";
         }
-    });
+    })
+    .catch(err => {window.location.href="../html/error.html";})
+    ;
     
 }
