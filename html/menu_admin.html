@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/menu_admin.css">
+    <script type="text/javascript" src="../js/menu_admin.js"></script>
+    <title>Menu Admin</title>
+</head>
+<body onload="init()">
+    <header id="header">
+        <h2>Menu Admin</h2>
+    </header>
+
+    <section id="bloc_info">
+        <h3 id ="h3_username">username : <span id="span_username"></span></h3>
+        <h4 id ="h3_token">token : <p id="p_token"></p></h4>
+        <div class="button" onclick="requestListAllUsers()"><p id="p_button_1">Afficher la Liste des Users</p></div>
+        <div id="result"></div>
+    </section>
+</body>
+</html>

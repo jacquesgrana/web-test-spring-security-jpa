@@ -1,0 +1,193 @@
+@font-face {
+    font-family: "Roboto condensed regular";
+    src: url("../font/Roboto_Condensed/RobotoCondensed-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Roboto condensed bold";
+    src: url("../font/Roboto_Condensed/RobotoCondensed-Bold.ttf") format("truetype");
+}
+
+h2, h3, h4 {
+    color: rgb(255, 255, 255);
+    margin: auto;
+    text-align: center;
+    font-family: "Roboto condensed bold";
+}
+
+body {
+    background-color: rgb(13, 32, 71);
+    font-family: "Roboto condensed regular";
+    padding: 0;
+    margin: 0;
+}
+
+#header {
+    width: 80%;
+    height: 90%;
+    margin: auto;
+    margin-top: 15%;
+}
+
+#bloc_info {
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+
+    border: 1px solid  rgb(84, 138, 238);
+    width: 30rem;
+    height: auto;
+    border-radius: 2rem;
+    border-left-style: solid;
+    margin: auto;
+    margin-top: 2%;
+    background-color: rgb(11, 43, 102);
+    padding-bottom: 1.4rem;
+    padding-top: 1.6rem;
+    box-shadow: 0px 0px 10px 5px rgb(19, 64, 150);
+}
+
+#span_username {
+    color : rgb(252, 200, 31);
+    margin-top: 0rem;
+}
+
+#p_token {
+    color : rgb(252, 200, 31);
+    font-size: 8pt;
+    font-family: "Roboto condensed regular";
+    width: 27rem;
+    height: 6rem;
+    margin-left: 0.5rem;
+    display: block;
+    text-align: justify;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    -o-hyphens: auto;
+    word-break:break-word;
+    hyphens: auto;
+    
+}
+
+#h3_token {
+    width: 28rem;
+    height: 6rem;
+    display: block;
+    margin-top: 1.4rem;
+}
+
+.button {
+    background-color: rgb(40, 73, 133);
+    font-family: "Roboto condensed bold";
+    width: 12.3rem;
+    height: 2rem;
+    border: 1px solid rgb(84, 138, 238);
+    color: rgb(252, 200, 31);
+    text-align: center;
+    text-decoration: none;
+    margin-left: 0rem;
+    border-radius: 0.5rem;
+    font-size: 14px;
+    outline: none; 
+    margin-top: -0.2rem;
+}
+.button:hover {
+    background-color: rgb(47, 102, 206);
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(255, 255, 255);
+}
+
+#p_button_1 {
+    margin-top: 0.5rem;
+}
+
+#result {
+    width: 27rem;
+    margin-top: 1rem;
+    
+    background-color: rgb(19, 59, 133);
+    border-radius: 0.25rem;
+    font-size: 12pt;
+    font-family: "Roboto condensed regular";
+}
+
+#result li {
+    width: 23rem;
+    list-style: disc;
+    color: white;
+}
+
+.red_text {
+    color: red;
+}
+
+.white_text {
+    color: white;
+}
+.green_text {
+    color: green;
+}
+
+.orange_text {
+    color: orange;
+}
+
+.yellow_text {
+    color: yellow;
+}
+
+.blue_text {
+    color: rgb(65, 109, 253);
+}
+
+#result ul li article {
+    
+}
+
+#article_user_list {
+    color: rgb(252, 200, 31);
+    display: flex;
+    
+    flex-direction: row;
+    justify-content: space-between;
+    align-items:center;
+    width: 23rem;
+    height: 2rem;
+}
+
+.button_little {
+    background-color: rgb(40, 73, 133);
+    font-family: "Roboto condensed bold";
+    width: 5rem;
+    height: 1.4rem;
+    border: 1px solid rgb(84, 138, 238);
+    color: rgb(252, 200, 31);
+    font-size: 9pt;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 0.5rem;
+}
+
+.button_little_disabled {
+    background-color: rgb(40, 73, 133);
+    font-family: "Roboto condensed bold";
+    width: 5rem;
+    height: 1.4rem;
+    border: 1px solid rgb(72, 110, 182);
+    color: rgb(151, 174, 204);
+    font-size: 9pt;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 0.5rem;
+}
+
+.button_little:hover {
+    background-color: rgb(47, 102, 206);
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(255, 255, 255);
+}
+
+.p_button_little {
+    margin-top: 0.25rem;
+}

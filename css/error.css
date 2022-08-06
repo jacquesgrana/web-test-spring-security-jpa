@@ -1,0 +1,57 @@
+@font-face {
+    font-family: "Roboto condensed regular";
+    src: url("../font/Roboto_Condensed/RobotoCondensed-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Roboto condensed bold";
+    src: url("../font/Roboto_Condensed/RobotoCondensed-Bold.ttf") format("truetype");
+}
+
+h2, h3, h4 {
+    color: rgb(255, 255, 255);
+    margin: auto;
+    text-align: center;
+    font-family: "Roboto condensed bold";
+}
+
+body {
+    background-color: rgb(13, 32, 71);
+    font-family: "Roboto condensed regular";
+    padding: 0;
+    margin: 0;
+}
+
+#header {
+    width: 80%;
+    height: 90%;
+    margin: auto;
+    margin-top: 15%;
+}
+
+#bloc_link {
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+
+    border: 1px solid  rgb(84, 138, 238);
+    width: 30rem;
+    height: 4rem;
+    border-radius: 2rem;
+    border-left-style: solid;
+    margin: auto;
+    margin-top: 2%;
+    background-color: rgb(11, 43, 102);
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    box-shadow: 0px 0px 10px 5px rgb(19, 64, 150);
+}
+
+#link {
+    margin: auto;
+    margin-top: 04%;
+}
+
+.text_link:hover {
+    color: rgb(252, 200, 31);
+}

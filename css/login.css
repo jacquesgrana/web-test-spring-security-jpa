@@ -1,0 +1,146 @@
+@font-face {
+    font-family: "Roboto condensed regular";
+    src: url("/font/Roboto_Condensed/RobotoCondensed-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Roboto condensed bold";
+    src: url("/font/Roboto_Condensed/RobotoCondensed-Bold.ttf") format("truetype");
+}
+
+h2, h3 {
+    color: rgb(255, 255, 255);
+    margin: auto;
+    text-align: center;
+    font-family: "Roboto condensed bold";
+}
+
+h3 {
+    color: rgb(252, 200, 31);
+}
+
+body {
+    background-color: rgb(13, 32, 71);
+    font-family: "Roboto condensed regular";
+    padding: 0;
+    margin: 0;
+}
+
+#header {
+    width: 80%;
+    height: 90%;
+    margin: auto;
+    margin-top: 15%;
+}
+
+#bloc_form {
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+    
+    justify-content: space-between;
+    border: 1px solid  rgb(84, 138, 238);
+    width: 30rem;
+    height: 12rem;
+    border-radius: 2rem;
+    border-left-style: solid;
+    margin: auto;
+    margin-top: 2%;
+    background-color: rgb(11, 43, 102);
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    box-shadow: 0px 0px 10px 5px rgb(19, 64, 150);
+}
+
+#form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 8rem;
+    flex-wrap: wrap;
+    width: 28rem;
+    margin: auto;
+}
+
+.champ_form {
+    justify-content:center;
+    display: flex;
+    flex-flow:row;
+    flex-direction:row;
+    width: 28rem;
+}
+
+.champ_form label {
+    color: rgb(255, 255, 255);
+    padding-top: 0.3rem;
+}
+
+.champ_form label:hover {
+    color: rgb(252, 200, 31);
+}
+
+.button {
+    background-color: rgb(40, 73, 133);
+    font-family: "Roboto condensed bold";
+    width: 12.3rem;
+    height: 2rem;
+    border: 1px solid rgb(84, 138, 238);
+    color: rgb(252, 200, 31);
+    text-align: center;
+    text-decoration: none;
+    margin-left: 1rem;
+    border-radius: 0.5rem;
+    font-size: 14px;
+    outline: none; 
+}
+.button:hover {
+    background-color: rgb(47, 102, 206);
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(255, 255, 255);
+}
+
+input {
+    background-color: rgb(40, 73, 133);
+    color: rgb(252, 200, 31);
+    margin-left: 1rem;
+    height: 1.6rem;
+    width: 16rem;
+    display: inline-block;
+    border-radius: 0.5rem;
+    border: 1px solid rgb(84, 138, 238);
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+input:hover {
+    background-color:rgb(47, 102, 206);
+    border: 1px solid rgb(255, 255, 255);
+}
+
+#span_eye {
+    margin-left: 0.8rem;
+    width: 1.7rem;
+    height: 1.7rem;
+    background-color: rgb(40, 73, 133);
+    border: 1px solid rgb(84, 138, 238);
+    border-radius: 0.5rem;
+    color: white;
+}
+
+#eye_icon {
+    width: 1.2rem;
+    height: 1.2rem;
+    margin: auto;
+    margin-top: 0.2rem;
+    margin-left: 0.3rem;
+    display: inline;
+}
+
+#span_eye:hover {
+    background-color:rgb(47, 102, 206);
+    border: 1px solid rgb(255, 255, 255);
+}
+
+#champ_username {
+    margin-left: -1.25rem;
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/login.css">
+    <script type="text/javascript" src="js/login.js"></script>
+    <title>Login</title>
+</head>
+<body onload="init()">
+    <header id="header">
+        <h2>Page de Login</h2>
+    </header>
+    <section id="bloc_form">
+        <h3>Saisir les identifiants</h3>
+        <form id="form" action="http://localhost:8090/api/signin" method="post">
+            <div class="champ_form" id="champ_username">
+                <label for="username">Username</label>
+                <input class="input" type="text" id="user_name" name="username">
+            </div>
+            <div class="champ_form">
+                <label for="password">Password</label>
+                <input class="input" type="password" id="password" name="password">
+                <span id="span_eye" onclick="togglePassword()">
+                    <img id="eye_icon" src="/image/eye-3-128.png">
+                        
+                </span>
+            </div>
+            <div>
+                <button class="button" type="button" onclick="logRequest()">Se Logger</button>
+                <button class="button" type="reset">Effacer</button>
+            </div>
+        </form>
+        
+    </section>
+
+</body>
+</html>
