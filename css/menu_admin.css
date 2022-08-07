@@ -42,7 +42,7 @@ body {
     margin: auto;
     margin-top: 2%;
     background-color: rgb(11, 43, 102);
-    padding-bottom: 1.4rem;
+    padding-bottom: 0.6rem;
     padding-top: 1.6rem;
     box-shadow: 0px 0px 10px 5px rgb(19, 64, 150);
 }
@@ -76,7 +76,12 @@ body {
     font-family: "Roboto condensed regular";
     width: 27rem;
     display: inline;
-    
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    -o-hyphens: auto;
+    word-break:break-word;
+    hyphens: auto;
 }
 
 #h3_token {
@@ -85,6 +90,107 @@ body {
     display: block;
     margin-top: 1.4rem;
     margin-bottom: -1rem;
+}
+
+#bloc_user_add {
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+    width: 27rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    background-color: rgb(19, 59, 133);
+    border-radius: 0.25rem;
+    font-size: 12pt;
+    font-family: "Roboto condensed regular";
+}
+
+#form_user_add {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 28rem;
+    margin: auto;
+}
+
+.champ_form {
+    width: 25rem;
+    margin-top: 0.8rem;
+    margin-bottom: 0.8rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+#champ_username, 
+#champ_password,
+#champ_active,
+#champ_role {
+    display: inline;
+}
+
+#username,
+#password {
+    width: 17.85rem;
+}
+
+.champ_form label {
+    color: rgb(255, 255, 255);
+    padding-top: 0.3rem;
+}
+
+.champ_form label:hover {
+    color: rgb(252, 200, 31);
+}
+
+#champ_active,
+#champ_role {
+    display: flex;
+    justify-content:flex-start;
+    font-size: 12pt;
+    font-family: "Roboto condensed regular";
+    color : rgb(252, 200, 31);
+}
+
+.radio_user_add {
+    
+    margin-left: 1rem;
+    margin-right: -0.3rem;
+    width: 3rem;
+    height: 1rem;
+    margin-top: 0.4rem;
+    border: 8px solid rgb(84, 138, 238);
+    background-color: rgb(40, 73, 133);
+    color: rgb(40, 73, 133);
+}
+
+.text_radio_user_add {
+    padding-top: 0.3rem;
+    display: inline;
+}
+
+#bloc_button_user_add {
+    display: flex;
+    justify-content: space-between;
+    margin-top: -0.6rem;
+}
+
+input {
+    background-color: rgb(40, 73, 133);
+    color: rgb(252, 200, 31);
+    margin-left: 1rem;
+    height: 1.6rem;
+    width: 16rem;
+    display: inline;
+    border-radius: 0.5rem;
+    border: 1px solid rgb(84, 138, 238);
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+input:hover {
+    background-color:rgb(47, 102, 206);
+    border: 1px solid rgb(255, 255, 255);
 }
 
 #bloc_user_info {
@@ -114,7 +220,7 @@ body {
 .button {
     background-color: rgb(40, 73, 133);
     font-family: "Roboto condensed bold";
-    width: 12.3rem;
+    width: 12rem;
     height: 2rem;
     border: 1px solid rgb(84, 138, 238);
     color: rgb(252, 200, 31);
@@ -132,7 +238,9 @@ body {
     border: 1px solid rgb(255, 255, 255);
 }
 
-#p_button_1, #p_button_0 {
+#p_button_2, 
+#p_button_1, 
+#p_button_0 {
     margin-top: 0.5rem;
 }
 
@@ -144,6 +252,7 @@ body {
     border-radius: 0.25rem;
     font-size: 12pt;
     font-family: "Roboto condensed regular";
+    margin-bottom: 1rem;
 }
 
 #result li {

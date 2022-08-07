@@ -5,6 +5,8 @@ var isUserListLoaded = false;
 var isUserInfosVisible = false;
 var isUserInfosLoaded = false;
 
+var isAddUserVisible = false;
+
 var userListData;
 var userData;
 
@@ -22,6 +24,66 @@ function init() {
     // ajouter requete get /api/users/username/authorities qui renvoie les permissions
 
     // sert a generer le html selon les droits
+}
+
+function displayAddUsers() {
+    if (!isAddUserVisible) {
+        let html = "";
+        html += "<form id='form_user_add'>"
+        + '<div class="champ_form" id="champ_username">'
+        + '<label for="username">Username</label>'
+        + '<input class="input" type="text" id="username" name="username">'
+        + '</div>'
+        + '<div class="champ_form" id="champ_password">'
+        + '<label for="password">Password</label>'
+        + '<input class="input" type="text" id="password" name="password">'
+        + '</div>'
+        + '<div class="champ_form" id="champ_active">'
+        + '<label for="active">Active</label>'
+        + '<input type= "radio" class="radio_user_add" name="active" value="true" checked><span class= "text_radio_user_add">Oui</span>'
+        + '<input type= "radio" class="radio_user_add" name="active" value="false"><span class= "text_radio_user_add">Non</span>'
+        + '</div>'
+        + '<div class="champ_form" id="champ_role">'
+        + '<label for="role">Role</label>'
+        + '<input type="radio" class="radio_user_add" name="role" value="user" checked><span class= "text_radio_user_add">User</span>'
+        + '<input type="radio" class="radio_user_add" name="role" value="manager"><span class= "text_radio_user_add">Manager</span>'
+        + '<input type="radio" class="radio_user_add" name="role" value="admin"><span class= "text_radio_user_add">Admin</span>'
+        + '</div>'
+        + '<div class="champ_form" id="bloc_button_user_add">'
+        + '<button class="button" type="button" onclick="createUserRequest()">Créer user</button>'
+        + '<button class="button" type="reset">Effacer</button>'
+        + '</div>'
+
+        html += "</form>";
+        resultElement = document.getElementById("bloc_user_add");
+        resultElement.innerHTML = html;
+        textButtonElement = document.getElementById("p_button_2");
+        textButtonElement.innerText="Masquer ajouter un user";
+        isAddUserVisible = true;
+    }
+    else {
+        resultElement = document.getElementById("bloc_user_add");
+        resultElement.innerHTML = "";
+        textButtonElement = document.getElementById("p_button_2");
+        textButtonElement.innerText="Ajouter un user";
+        isAddUserVisible = false;
+    }
+}
+
+function createUserRequest() { // localhost:8090/api/admin/create
+    // récupérer données du formulaire
+    // formatter les données
+    // tester données
+
+    // faire requete post avec header body
+
+    // si requete ok 
+        // fermer div
+        // mettre a jour boolean list loaded
+        // fermer div list
+
+    // sinon page error
+
 }
 
 function requestAndDisplayUserInfos() {
