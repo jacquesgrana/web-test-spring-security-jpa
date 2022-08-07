@@ -40,7 +40,7 @@ function displayAddUsers() {
         + '</div>'
         + '<div class="champ_form" id="champ_active">'
         + '<label for="active">Active</label>'
-        + '<input type= "radio" class="radio_user_add" name="active" value="true" checked><span class= "text_radio_user_add">Oui</span>'
+        + '<input type= "radio" class="radio_user_add" name="active" name="active" value="true" checked><span class= "text_radio_user_add">Oui</span>'
         + '<input type= "radio" class="radio_user_add" name="active" value="false"><span class= "text_radio_user_add">Non</span>'
         + '</div>'
         + '<div class="champ_form" id="champ_role">'
@@ -72,10 +72,73 @@ function displayAddUsers() {
 
 function createUserRequest() { // localhost:8090/api/admin/create
     // récupérer données du formulaire
-    // formatter les données
-    // tester données
+    let usernameElement = document.getElementById("username");
+    let passwordElement = document.getElementById("password");
+    let activeElement = document.querySelector('input[name="active"]:checked');
+    let roleElement = document.querySelector('input[name="role"]:checked');
+    let usernameValue = usernameElement.value;
+    let passwordValue = passwordElement.value;
+    let activeNonFormatted = activeElement.value;
+    let roleNonFormatted = roleElement.value;
 
-    // faire requete post avec header body
+    // formatter les données
+    let activeValue = getFormattedActive(activeNonFormatted);
+    let roleValue = getFormattedRole(roleNonFormatted);
+    let roleId = getRoleId(roleNonFormatted);
+
+   // tester données
+    console.log('usernameValue', usernameValue);
+    console.log('passwordValue', passwordValue);
+    console.log('activeValue', activeValue);
+    console.log('roleValue', roleValue);
+    console.log('roleId', roleId);
+
+    // faire requete post avec header body  
+    const roleContent = {
+        id: roleId,
+        label: roleValue
+    };
+
+    const contentHeader = {
+        userName: usernameValue,
+        password: passwordValue,
+        active: activeValue,
+        role: roleContent
+    };
+
+    fetch("http://localhost:8090/api/admin/create", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + token
+        },
+        //headers: {"Content-Type": "application/json"},  
+        body: JSON.stringify(contentHeader)
+      })
+      //.then(res => res.status)
+      .then(res => {
+        resultElement = document.getElementById("result");
+        resultElement.innerHTML = "";
+        textButtonElement = document.getElementById("p_button_1");
+        textButtonElement.innerText="Afficher la liste des Users";
+        resultElement = document.getElementById("bloc_user_add");
+        resultElement.innerHTML = "";
+        textButtonElement = document.getElementById("p_button_2");
+        textButtonElement.innerText="Ajouter un user";
+        isAddUserVisible = false;
+        isUserListVisible = false;
+        isUserListLoaded = false;
+        alert('Ajout ok : ' + res);
+
+      })
+      .catch(err => {
+        console.log('erreur requete : ' + err);
+    }) //window.location.href="../html/error.html";
+      ;
+
+ 
+
+
 
     // si requete ok 
         // fermer div
@@ -84,6 +147,37 @@ function createUserRequest() { // localhost:8090/api/admin/create
 
     // sinon page error
 
+}
+
+function getRoleId(roleNonFormatted) {
+    switch (roleNonFormatted) {
+        case "user" :
+            return 3;
+        case "manager" :
+            return 2;
+        case "admin" :
+            return 1;
+    }
+}
+
+function getFormattedRole(roleNonFormatted) {
+    switch (roleNonFormatted) {
+        case "user" :
+            return "ROLE_USER";
+        case "manager" :
+            return "ROLE_MANAGER";
+        case "admin" :
+            return "ROLE_ADMIN";
+    }
+}
+
+function getFormattedActive(activeNonFormatted) {
+    if(activeNonFormatted == "true") {
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 function requestAndDisplayUserInfos() {
