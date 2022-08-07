@@ -114,9 +114,9 @@ function createUserRequest() { // localhost:8090/api/admin/create
         },
         //headers: {"Content-Type": "application/json"},  
         body: JSON.stringify(contentHeader)
-      })
+    })
       //.then(res => res.status)
-      .then(res => {
+    .then(res => {
         resultElement = document.getElementById("result");
         resultElement.innerHTML = "";
         textButtonElement = document.getElementById("p_button_1");
@@ -128,25 +128,12 @@ function createUserRequest() { // localhost:8090/api/admin/create
         isAddUserVisible = false;
         isUserListVisible = false;
         isUserListLoaded = false;
-        alert('Ajout ok : ' + res);
-
-      })
-      .catch(err => {
-        console.log('erreur requete : ' + err);
-    }) //window.location.href="../html/error.html";
-      ;
-
- 
-
-
-
-    // si requete ok 
-        // fermer div
-        // mettre a jour boolean list loaded
-        // fermer div list
-
-    // sinon page error
-
+        alert("Ajout user ok : " + res.ok);
+    })
+    .catch(err => {
+        //console.log('erreur requete : ' + err);
+        window.location.href="../html/error.html";
+    });
 }
 
 function getRoleId(roleNonFormatted) {
@@ -186,7 +173,7 @@ function requestAndDisplayUserInfos() {
             
             fetch("http://localhost:8090/api/user/username/" + username, {
             method: "GET",
-            headers: { 'Authorization': 'Bearer ' + token },
+            headers: { 'Authorization': 'Bearer ' + token }
             //headers: {"Content-Type": "application/json"},  
             })
             .then(res => res.json())
@@ -245,10 +232,11 @@ function requestAndDisplayListAllUsers() {
             .then(data => {
             userListData = data;
             displayUserList(userListData);
+            isUserListLoaded = true;
             })
             .catch(err => {window.location.href="../html/error.html";})
             ;
-            isUserListLoaded = true;
+            
         }
         else {
           displayUserList(userListData);
@@ -282,8 +270,8 @@ function displayUserList(data) {
 
         let classNameUsername = "white_text";
         let isUserLogged = (usernameDB == username);
-        let buttonHtml = "<span class='button_little'><p class='p_button_little'>Supprimer</p></span>"
-        + "<span class='button_little'><p class='p_button_little'>Editer</p></span>" ;
+        let buttonHtml = "<span class='button_little' onclick='deleteUser("  + idDB + ")'><p class='p_button_little'>Supprimer</p></span>"
+        + "<span class='button_little' onclick='displayUser("  + idDB + ")><p class='p_button_little'>Editer</p></span>";
         if(isUserLogged) {
             buttonHtml = "<span class='button_little_disabled'><p class='p_button_little'>Supprimer</p></span>"
             + "<span class='button_little_disabled'><p class='p_button_little'>Editer</p></span>";
@@ -301,6 +289,37 @@ function displayUserList(data) {
     }
     string += "</ul>";
     resultElement.innerHTML = string;
+}
+
+function deleteUser(id) { ///admin/delete/{id} DELETE mapping
+    //console.log("clic sur supprimer");
+    // faire requete
+    fetch("http://localhost:8090/api/admin/delete/" + id, {
+            method: "DELETE",
+            headers: { 'Authorization': 'Bearer ' + token }
+            //headers: {"Content-Type": "application/json"},  
+            })
+            .then(res => {
+                resultElement = document.getElementById("result");
+                resultElement.innerHTML = "";
+                textButtonElement = document.getElementById("p_button_1");
+                textButtonElement.innerText="Afficher la liste des Users";
+                isUserListVisible = false;
+                isUserListLoaded = false;
+                alert("Suppression user ok : " + res.ok);
+            })
+            .catch(err => {
+                //console.log('erreur requete : ' + err);
+                window.location.href="../html/error.html";
+            });
+
+}
+
+function displayUser(id) {
+
+    // afficher et mise a jour booleen
+    // si pas de modif rien
+
 }
 
 function getClassActive(active) {
