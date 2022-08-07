@@ -271,7 +271,12 @@ function displayUserList(data) {
         let classNameUsername = "white_text";
         let isUserLogged = (usernameDB == username);
         let buttonHtml = "<span class='button_little' onclick='deleteUser("  + idDB + ")'><p class='p_button_little'>Supprimer</p></span>"
-        + "<span class='button_little' onclick='displayUser("  + idDB + ")><p class='p_button_little'>Editer</p></span>";
+        + "<span class='button_little' onclick='displayUser("  
+        + idDB + ', "'
+        + usernameDB + '", "'
+        + active + '", "'
+        + roleValue
+        + "\")'><p class='p_button_little'>Editer</p></span>";
         if(isUserLogged) {
             buttonHtml = "<span class='button_little_disabled'><p class='p_button_little'>Supprimer</p></span>"
             + "<span class='button_little_disabled'><p class='p_button_little'>Editer</p></span>";
@@ -294,6 +299,11 @@ function displayUserList(data) {
 function deleteUser(id) { ///admin/delete/{id} DELETE mapping
     //console.log("clic sur supprimer");
     // faire requete
+
+    // TODO faire message de confirmation
+    
+    // si ok faire requete sinon rien
+
     fetch("http://localhost:8090/api/admin/delete/" + id, {
             method: "DELETE",
             headers: { 'Authorization': 'Bearer ' + token }
@@ -314,10 +324,20 @@ function deleteUser(id) { ///admin/delete/{id} DELETE mapping
             });
 
 }
+/*
++ idDB + ", "
+        + usernameDB + ", "
+        + active + ", "
+        + roleValue
+*/
 
-function displayUser(id) {
-
-    // afficher et mise a jour booleen
+function displayUser(idDB, usernameDB, activeDB, roleDB) {
+    console.log("function displayUser :");
+    console.log("idDB", idDB);
+    console.log("usernameDB : " + usernameDB);
+    console.log("activeDB", activeDB);
+    console.log("roleDB", roleDB);
+    // afficher formulaire avec deux boutons et mise a jour booleen
     // si pas de modif rien
 
 }
