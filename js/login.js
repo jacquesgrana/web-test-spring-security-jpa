@@ -30,7 +30,7 @@ function logRequest() {
         password: passwordValue
     };
     sessionStorage.setItem("username", usernameValue);
-
+    
     let data;
     
     fetch("http://localhost:8090/api/signin", {

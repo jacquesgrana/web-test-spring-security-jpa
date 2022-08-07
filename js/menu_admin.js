@@ -10,7 +10,7 @@ var userData;
 
 const username = sessionStorage.getItem("username");
 const token = sessionStorage.getItem("authtoken");
-
+//const id = sessionStorage.getItem("id");
 
 function init() {
     usernameElement = document.getElementById("span_username");
@@ -25,7 +25,53 @@ function init() {
 }
 
 function requestAndDisplayUserInfos() {
+    if (!isUserInfosVisible) {
+        if(!isUserInfosLoaded) {
+            
+            fetch("http://localhost:8090/api/user/username/" + username, {
+            method: "GET",
+            headers: { 'Authorization': 'Bearer ' + token },
+            //headers: {"Content-Type": "application/json"},  
+            })
+            .then(res => res.json())
+            .then(data => {
+            userData = data;
+            displayUserInfos(userData);
+            })
+            .catch(err => {window.location.href="../html/error.html";});
+            isUserInfosLoaded = true;
+        }
+        else {
+            displayUserInfos(userData);
+        }
+        isUserInfosVisible = true;
+        textButtonElement = document.getElementById("p_button_0");
+        textButtonElement.innerText="Masquer les infos de cet user";
+    }
+    else {
+        resultElement = document.getElementById("bloc_user_info");
+        resultElement.innerHTML = "";
+        textButtonElement = document.getElementById("p_button_0");
+        textButtonElement.innerText="Afficher les infos de cet user";
+        isUserInfosVisible = false;
+    }
+}
 
+function displayUserInfos(data) {
+    let html = "";
+    let idDB = data.id;
+    let password = data.password;
+    let active = data.active;
+    let role = getRoleValue(data.role.label);
+    let classNameActive = getClassActive(active);
+    let classNameRole = getClassRole(data.role.label);
+    html += "<p>Id : <span class='orange_text'>" + idDB + "</span></p>";
+    html += "<p>Username : <span class='orange_text'>" + username + "</span></p>";
+    html += "<p>Password : <span id='password_info'>" + password + "</span></p>";
+    html += "<p>Active : <span class='" + classNameActive + "'>" + active + "</span></p>";
+    html += "<p>Rôle : <span class='" + classNameRole + "'>" + role + "</span></p>";
+    resultElement = document.getElementById("bloc_user_info");
+    resultElement.innerHTML = html;
 }
 
 function requestAndDisplayListAllUsers() {
@@ -71,7 +117,7 @@ function displayUserList(data) {
     for (let i=0; i<data.length; i++) {
         let usernameDB = data[i].userName;
         //let password= data[i].password;
-        let id = data[i].id;
+        let idDB = data[i].id;
         let active = data[i].active;
         let role = data[i].role.label;
         let classNameActive = getClassActive(active);
@@ -88,7 +134,7 @@ function displayUserList(data) {
             classNameUsername = "orange_text";
         }
 
-        string += "<li><article id='article_user_list'>" + id 
+        string += "<li><article id='article_user_list'>" + idDB 
         + " : <span class='" + classNameUsername + "'>" + usernameDB 
         + "</span> : <span class=\"" + classNameActive + "\">" + active 
         + "</span> : <span class=\"" + classNameRole + "\">" + roleValue 

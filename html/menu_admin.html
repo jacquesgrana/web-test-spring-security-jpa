@@ -16,11 +16,9 @@
     <section id="bloc_info">
         <h3 id ="h3_username">username : <span id="span_username"></span></h3>
         <h4 id ="h3_token">token : <p id="p_token"></p></h4>
-        <div class="button" onclick=""><p id="p_button_0">Afficher les infos de cet user</p></div>
-        <div id="bloc_user_info">
-
-        </div>
-        <div class="button" onclick="requestListAllUsers()"><p id="p_button_1">Afficher la Liste des Users</p></div>
+        <div class="button" onclick="requestAndDisplayUserInfos()"><p id="p_button_0">Afficher les infos de cet user</p></div>
+        <div id="bloc_user_info"></div>
+        <div class="button" onclick="requestAndDisplayListAllUsers()"><p id="p_button_1">Afficher la Liste des Users</p></div>
         <div id="result"></div>
     </section>
 </body>

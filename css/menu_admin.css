@@ -70,6 +70,15 @@ body {
     
 }
 
+#password_info {
+    color : rgb(252, 200, 31);
+    font-size: 8pt;
+    font-family: "Roboto condensed regular";
+    width: 27rem;
+    display: inline;
+    
+}
+
 #h3_token {
     width: 28rem;
     height: 6rem;
@@ -79,14 +88,27 @@ body {
 }
 
 #bloc_user_info {
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
     width: 27rem;
     margin-top: -1rem;
     margin-bottom: 1rem;
-    
     background-color: rgb(19, 59, 133);
     border-radius: 0.25rem;
     font-size: 12pt;
     font-family: "Roboto condensed regular";
+}
+
+#bloc_user_info p {
+    width: 25rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    color : rgb(255, 255, 255);
+    font-size: 12pt;
+    font-family: "Roboto condensed regular";
+    margin-top: 0.6rem;
+    margin-bottom: 0.6rem;
 }
 
 .button {
@@ -130,6 +152,16 @@ body {
     color: white;
 }
 
+#bloc_user_info {
+    width: 27rem;
+    margin-top: 1rem;
+    
+    background-color: rgb(19, 59, 133);
+    border-radius: 0.25rem;
+    font-size: 12pt;
+    font-family: "Roboto condensed regular";
+}
+
 .red_text {
     color: red;
 }
@@ -163,7 +195,7 @@ body {
     
     flex-direction: row;
     justify-content: space-between;
-    align-items:center;
+    
     width: 23rem;
     height: 2rem;
 }
