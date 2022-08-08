@@ -134,13 +134,28 @@ body {
     width: 17.85rem;
 }
 
-.champ_form label {
+.champ_form label, .label_edit {
     color: rgb(255, 255, 255);
     padding-top: 0.3rem;
 }
 
 .champ_form label:hover {
     color: rgb(252, 200, 31);
+}
+
+.champ_edit {
+    background-color: rgb(40, 73, 133);
+    color: rgb(252, 200, 31);
+    margin-left: 1rem;
+    height: 1.6rem;
+    width: 16rem;
+    display: inline;
+    border-radius: 0.5rem;
+    border: 1px solid rgb(84, 138, 238);
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.2rem;
+    padding-bottom: 0.25rem;
 }
 
 #champ_active,
@@ -191,6 +206,19 @@ input {
 input:hover {
     background-color:rgb(47, 102, 206);
     border: 1px solid rgb(255, 255, 255);
+}
+
+#bloc_user_edit {
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+    width: 27rem;
+    margin-top: 0rem;
+    margin-bottom: 1rem;
+    background-color: rgb(19, 59, 133);
+    border-radius: 0.25rem;
+    font-size: 12pt;
+    font-family: "Roboto condensed regular";
 }
 
 #bloc_user_info {

@@ -7,6 +7,8 @@ var isUserInfosLoaded = false;
 
 var isAddUserVisible = false;
 
+var isEditUserVisible = false;
+
 var userListData;
 var userData;
 
@@ -24,6 +26,114 @@ function init() {
     // ajouter requete get /api/users/username/authorities qui renvoie les permissions
 
     // sert a generer le html selon les droits
+}
+
+function editUser(idDB, usernameDB, activeDB, roleDB) {
+
+
+    
+    
+    // afficher formulaire avec deux boutons et mise a jour booleen
+    // si pas de modif rien
+
+    let divElement = document.getElementById("bloc_user_edit");
+
+    if (!isEditUserVisible) {
+        // TODO checker les bonnes checkboxes selon les valeurs initiales
+        let html = "";
+        html += "<form id='form_user_add'>"
+        + '<div class="champ_form" id="champ_username_edit">'
+        + '<span class="label_edit">Username</label>'
+        + '<span class="champ_edit" id="username_edit">'
+        + usernameDB
+        + '</span>'
+        + '</div>'
+        + '<div class="champ_form" id="champ_password_edit">'
+        + '<label for="password">Password</label>'
+        + '<input class="input" type="text" id="password_edit" name="password">'
+        + '</div>'
+        
+
+        + '<div class="champ_form" id="champ_active">'
+        + '<label for="active">Active</label>'
+        + '<input type= "radio" class="radio_user_add" id="true_radio_edit" name="active_edit" value="true" checked><span class= "text_radio_user_add">Oui</span>'
+        + '<input type= "radio" class="radio_user_add" id="false_radio_edit" name="active_edit" value="false"><span class= "text_radio_user_add">Non</span>'
+        + '</div>'
+        + '<div class="champ_form" id="champ_role">'
+        + '<label for="role">Role</label>'
+        + '<input type="radio" class="radio_user_add" id="user_radio_edit" name="role_edit" value="user" checked><span class= "text_radio_user_add">User</span>'
+        + '<input type="radio" class="radio_user_add" id="manager_radio_edit" name="role_edit" value="manager"><span class= "text_radio_user_add">Manager</span>'
+        + '<input type="radio" class="radio_user_add" id="admin_radio_edit" name="role_edit" value="admin"><span class= "text_radio_user_add">Admin</span>'
+        + '</div>'
+        + '<div class="champ_form" id="bloc_button_user_update">'
+        + '<button class="button" type="button" onclick=\'updateUserRequest(' + idDB  + ', "' + usernameDB + '" )\'>Mettre à jour cet user</button>'
+        + '<button class="button" type="reset">Effacer</button>'
+        + '</div>'
+
+        + "</form>";
+
+        divElement.innerHTML = html;
+
+
+        // TODO factoriser
+
+        if(activeDB == "true") {
+            document.getElementById("true_radio_edit").checked = true;
+            document.getElementById("false_radio_edit").checked = false;
+        }
+        else {
+            document.getElementById("true_radio_edit").checked = false;
+            document.getElementById("false_radio_edit").checked = true;
+        }
+
+
+        switch (roleDB) {
+            case "User" :
+            document.getElementById("user_radio_edit").checked = true;
+            document.getElementById("manager_radio_edit").checked = false;
+            document.getElementById("admin_radio_edit").checked = false;
+            break;
+            case "Manager" :
+            document.getElementById("user_radio_edit").checked = false;
+            document.getElementById("manager_radio_edit").checked = true;
+            document.getElementById("admin_radio_edit").checked = false;
+            break;
+            case "Admin" :
+            document.getElementById("user_radio_edit").checked = false;
+            document.getElementById("manager_radio_edit").checked = false;
+            document.getElementById("admin_radio_edit").checked = true;
+            break;
+        }
+
+        isEditUserVisible = true;
+    }
+    else {
+        divElement.innerHTML = "";
+        isEditUserVisible = false;
+    }
+}
+
+function updateUserRequest(idDB, usernameDB) {
+    //idDb = 
+    // a faire avant la requete
+    //let usernameDB = document.getElementById("username_edit").value;
+    let passwordDB = document.getElementById("password_edit").value;
+    let activeDB = document.querySelector('input[name="active_edit"]:checked').value;
+    let roleDB = document.querySelector('input[name="role_edit"]:checked').value;
+
+    let activeFormatted = getFormattedActive(activeDB);
+    let roleFormatted = getFormattedRole(roleDB.toLowerCase());
+    let idRole = getRoleId(roleDB.toLowerCase());
+
+    console.log("function updateUserRequest :");
+    console.log("idDB :", idDB);
+    console.log("usernameDB :", usernameDB);
+    console.log("passwordDB :", passwordDB);
+    console.log("activeDB :", activeFormatted);
+    console.log("roleDB :", roleFormatted);
+    console.log("idRole :", idRole);
+
+    // faire requete PUT
 }
 
 function displayAddUsers() {
@@ -128,6 +238,9 @@ function createUserRequest() { // localhost:8090/api/admin/create
         isAddUserVisible = false;
         isUserListVisible = false;
         isUserListLoaded = false;
+
+        document.getElementById("bloc_user_edit").innerHTML = "";
+        isEditUserVisible = false;
         alert("Ajout user ok : " + res.ok);
     })
     .catch(err => {
@@ -197,6 +310,8 @@ function requestAndDisplayUserInfos() {
         textButtonElement = document.getElementById("p_button_0");
         textButtonElement.innerText="Afficher les infos de cet user";
         isUserInfosVisible = false;
+        document.getElementById("bloc_user_edit").innerHTML = "";
+        isEditUserVisible = false;
     }
 }
 
@@ -252,6 +367,8 @@ function requestAndDisplayListAllUsers() {
         textButtonElement = document.getElementById("p_button_1");
         textButtonElement.innerText="Afficher la liste des Users";
         isUserListVisible = false;
+        document.getElementById("bloc_user_edit").innerHTML = "";
+        isEditUserVisible = false;
     }
 }
 
@@ -271,7 +388,7 @@ function displayUserList(data) {
         let classNameUsername = "white_text";
         let isUserLogged = (usernameDB == username);
         let buttonHtml = "<span class='button_little' onclick='deleteUser("  + idDB + ")'><p class='p_button_little'>Supprimer</p></span>"
-        + "<span class='button_little' onclick='displayUser("  
+        + "<span class='button_little' onclick='editUser("  
         + idDB + ', "'
         + usernameDB + '", "'
         + active + '", "'
@@ -322,23 +439,6 @@ function deleteUser(id) { ///admin/delete/{id} DELETE mapping
                 //console.log('erreur requete : ' + err);
                 window.location.href="../html/error.html";
             });
-
-}
-/*
-+ idDB + ", "
-        + usernameDB + ", "
-        + active + ", "
-        + roleValue
-*/
-
-function displayUser(idDB, usernameDB, activeDB, roleDB) {
-    console.log("function displayUser :");
-    console.log("idDB", idDB);
-    console.log("usernameDB : " + usernameDB);
-    console.log("activeDB", activeDB);
-    console.log("roleDB", roleDB);
-    // afficher formulaire avec deux boutons et mise a jour booleen
-    // si pas de modif rien
 
 }
 
