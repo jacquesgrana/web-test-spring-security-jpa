@@ -42,6 +42,13 @@ function editUser(idDB, usernameDB, activeDB, roleDB) {
         // TODO checker les bonnes checkboxes selon les valeurs initiales
         let html = "";
         html += "<form id='form_user_add'>"
+        
+        + '<div class="champ_form" id="champ_id_edit">'
+        + '<span class="label_edit">Id</label>'
+        + '<span class="champ_edit" id="id_edit">'
+        + idDB
+        + '</span>'
+        + '</div>'
         + '<div class="champ_form" id="champ_username_edit">'
         + '<span class="label_edit">Username</label>'
         + '<span class="champ_edit" id="username_edit">'
@@ -134,6 +141,59 @@ function updateUserRequest(idDB, usernameDB) {
     console.log("idRole :", idRole);
 
     // faire requete PUT
+
+    if(passwordDB != "") {
+        const roleContent = {
+            id: idRole,
+            label: roleFormatted
+        };
+    
+        const contentHeader = {
+            id: idDB,
+            userName: usernameDB,
+            password: passwordDB,
+            active: activeFormatted,
+            role: roleContent
+        };
+
+        console.log("password ok et objet contentHeader créé");
+
+        fetch("http://localhost:8090/api/admin/update/" + idDB, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            },
+            body: JSON.stringify(contentHeader)
+        })
+        .then(res => {
+                   // fermer les div et mettre a jour les booleens
+
+            resultElement = document.getElementById("result");
+            resultElement.innerHTML = "";
+            textButtonElement = document.getElementById("p_button_1");
+            textButtonElement.innerText="Afficher la liste des Users";
+            isUserListVisible = false;
+            isUserListLoaded = false;
+            document.getElementById("bloc_user_edit").innerHTML = "";
+            isEditUserVisible = false;
+            alert("Update user ok : " + res.ok);
+        })
+        .catch(err => {
+            //console.log('erreur requete : ' + err);
+            window.location.href="../html/error.html";
+        })
+        ;
+
+
+
+
+ 
+    }
+    else {
+        console.log("password vide");
+    }
+    
 }
 
 function displayAddUsers() {
