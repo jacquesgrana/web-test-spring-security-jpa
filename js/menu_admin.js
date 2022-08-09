@@ -167,13 +167,16 @@ function updateUserRequest(idDB, usernameDB) {
             body: JSON.stringify(contentHeader)
         })
         .then(res => {
-                   // fermer les div et mettre a jour les booleens
-
+            
+            // fermer les div et mettre a jour les booleens
+            closeDivListUSer();
+            /*
             resultElement = document.getElementById("result");
             resultElement.innerHTML = "";
             textButtonElement = document.getElementById("p_button_1");
             textButtonElement.innerText="Afficher la liste des Users";
             isUserListVisible = false;
+            */
             isUserListLoaded = false;
             document.getElementById("bloc_user_edit").innerHTML = "";
             isEditUserVisible = false;
@@ -182,12 +185,7 @@ function updateUserRequest(idDB, usernameDB) {
         .catch(err => {
             //console.log('erreur requete : ' + err);
             window.location.href="../html/error.html";
-        })
-        ;
-
-
-
-
+        });
  
     }
     else {
@@ -287,16 +285,19 @@ function createUserRequest() { // localhost:8090/api/admin/create
     })
       //.then(res => res.status)
     .then(res => {
+        closeDivListUSer();
+        /*
         resultElement = document.getElementById("result");
         resultElement.innerHTML = "";
         textButtonElement = document.getElementById("p_button_1");
         textButtonElement.innerText="Afficher la liste des Users";
+        isUserListVisible = false;
+        */
         resultElement = document.getElementById("bloc_user_add");
         resultElement.innerHTML = "";
         textButtonElement = document.getElementById("p_button_2");
         textButtonElement.innerText="Ajouter un user";
         isAddUserVisible = false;
-        isUserListVisible = false;
         isUserListLoaded = false;
 
         document.getElementById("bloc_user_edit").innerHTML = "";
@@ -307,37 +308,6 @@ function createUserRequest() { // localhost:8090/api/admin/create
         //console.log('erreur requete : ' + err);
         window.location.href="../html/error.html";
     });
-}
-
-function getRoleId(roleNonFormatted) {
-    switch (roleNonFormatted) {
-        case "user" :
-            return 3;
-        case "manager" :
-            return 2;
-        case "admin" :
-            return 1;
-    }
-}
-
-function getFormattedRole(roleNonFormatted) {
-    switch (roleNonFormatted) {
-        case "user" :
-            return "ROLE_USER";
-        case "manager" :
-            return "ROLE_MANAGER";
-        case "admin" :
-            return "ROLE_ADMIN";
-    }
-}
-
-function getFormattedActive(activeNonFormatted) {
-    if(activeNonFormatted == "true") {
-        return true;
-    }
-    else {
-        return false;
-    }
 }
 
 function requestAndDisplayUserInfos() {
@@ -422,11 +392,14 @@ function requestAndDisplayListAllUsers() {
         
     }
     else {
+        closeDivListUSer();
+        /*
         resultElement = document.getElementById("result");
         resultElement.innerHTML = "";
         textButtonElement = document.getElementById("p_button_1");
         textButtonElement.innerText="Afficher la liste des Users";
         isUserListVisible = false;
+        */
         document.getElementById("bloc_user_edit").innerHTML = "";
         isEditUserVisible = false;
     }
@@ -487,11 +460,14 @@ function deleteUser(id) { ///admin/delete/{id} DELETE mapping
             //headers: {"Content-Type": "application/json"},  
             })
             .then(res => {
+                closeDivListUSer();
+                /*
                 resultElement = document.getElementById("result");
                 resultElement.innerHTML = "";
                 textButtonElement = document.getElementById("p_button_1");
                 textButtonElement.innerText="Afficher la liste des Users";
                 isUserListVisible = false;
+                */
                 isUserListLoaded = false;
                 alert("Suppression user ok : " + res.ok);
             })
@@ -500,6 +476,45 @@ function deleteUser(id) { ///admin/delete/{id} DELETE mapping
                 window.location.href="../html/error.html";
             });
 
+}
+
+function closeDivListUSer() {
+    resultElement = document.getElementById("result");
+    resultElement.innerHTML = "";
+    textButtonElement = document.getElementById("p_button_1");
+    textButtonElement.innerText="Afficher la liste des Users";
+    isUserListVisible = false;
+}
+
+function getRoleId(roleNonFormatted) {
+    switch (roleNonFormatted) {
+        case "user" :
+            return 3;
+        case "manager" :
+            return 2;
+        case "admin" :
+            return 1;
+    }
+}
+
+function getFormattedRole(roleNonFormatted) {
+    switch (roleNonFormatted) {
+        case "user" :
+            return "ROLE_USER";
+        case "manager" :
+            return "ROLE_MANAGER";
+        case "admin" :
+            return "ROLE_ADMIN";
+    }
+}
+
+function getFormattedActive(activeNonFormatted) {
+    if(activeNonFormatted == "true") {
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 function getClassActive(active) {
