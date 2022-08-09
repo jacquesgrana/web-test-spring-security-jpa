@@ -29,6 +29,25 @@ body {
     margin-top: 15%;
 }
 
+#nav {
+    display: flex;
+    align-items:center;
+    margin: auto;
+    margin-top: 1.2rem;
+}
+
+.link_nav {
+    margin: auto;
+    font-size: 12pt;
+    font-family: "Roboto condensed regular";
+    color : rgb(252, 200, 31);
+    text-decoration: none;
+}
+
+.link_nav:hover {
+    color: white;
+}
+
 #bloc_info {
     display: flex;
     flex-direction: column;
@@ -313,6 +332,10 @@ input:hover {
 
 .orange_text {
     color: orange;
+}
+
+.orange_2_text {
+    color: rgb(252, 200, 31);
 }
 
 .yellow_text {

@@ -18,7 +18,7 @@ function redirectByRoleId(data) {
     //console.log("id : " + roleId);
     switch (roleId) {
         case 1 :
-            window.location.href="../html/menu_admin.html";
+            window.location.href="../html/menu_admin_user.html";
         break;
         case 2 :
             window.location.href="../html/menu_manager.html";
