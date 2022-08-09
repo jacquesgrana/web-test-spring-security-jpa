@@ -21,24 +21,29 @@ function init() {
     tokenElement = document.getElementById("p_token");
     usernameElement.innerText = username;
     tokenElement.innerText = token;
-    
-
-    // ajouter requete get /api/users/username/authorities qui renvoie les permissions
-
-    // sert a generer le html selon les droits
 }
 
-function editUser(idDB, usernameDB, activeDB, roleDB) {
+// TODO modifier create et update pour la liste animals *****************************************************************
 
-
-    
-    
-    // afficher formulaire avec deux boutons et mise a jour booleen
+function editUser(idDB, usernameDB, activeDB, roleDB, animalsString) { //, animals
     // si pas de modif rien
+    
 
     let divElement = document.getElementById("bloc_user_edit");
-
+    let animals;
+    //let htmlAnimals = "";
     if (!isEditUserVisible) {
+        
+        if(animalsString != "[]") {
+            animalsString = animalsString.replaceAll('|', '"');
+            animals = JSON.parse(animalsString);
+            console.log("animal 1 : " + animals[0].name)
+            console.log("animals string : " + animalsString);
+        }
+        else {
+            animals = null;
+        }
+
         // TODO checker les bonnes checkboxes selon les valeurs initiales
         let html = "";
         html += "<form id='form_user_add'>"
@@ -119,6 +124,8 @@ function editUser(idDB, usernameDB, activeDB, roleDB) {
         isEditUserVisible = false;
     }
 }
+
+// TODO modifier create et update pour la liste animals
 
 function updateUserRequest(idDB, usernameDB) {
     //idDb = 
@@ -238,6 +245,8 @@ function displayAddUsers() {
     }
 }
 
+// TODO modifier create et update pour la liste animals
+
 function createUserRequest() { // localhost:8090/api/admin/create
     // récupérer données du formulaire
     let usernameElement = document.getElementById("username");
@@ -267,6 +276,7 @@ function createUserRequest() { // localhost:8090/api/admin/create
         label: roleValue
     };
 
+    // TODO modifier create et update pour la liste animals
     const contentHeader = {
         userName: usernameValue,
         password: passwordValue,
@@ -379,7 +389,7 @@ function requestAndDisplayListAllUsers() {
             displayUserList(userListData);
             isUserListLoaded = true;
             })
-            .catch(err => {window.location.href="../html/error.html";})
+            .catch(err => {window.location.href="../html/error.html";}) // window.location.href="../html/error.html"; *************************************************************************
             ;
             
         }
@@ -405,12 +415,32 @@ function requestAndDisplayListAllUsers() {
     }
 }
 
+// TODO modifier create et update pour la liste animals ******************************
 function displayUserList(data) {
     resultElement = document.getElementById("result");
     let string ="<ul>";
     for (let i=0; i<data.length; i++) {
+        
+        
+
+
         let usernameDB = data[i].userName;
-        //let password= data[i].password;
+
+        let animals= data[i].animals;
+        let animalsString = JSON.stringify(animals);
+        animalsString = animalsString.replaceAll('"', '|');
+        let htmlAnimals = "";
+        //console.log("animals :" + animalsString);
+
+        // TODO faire fonction
+        if(animalsString != "[]") {
+            htmlAnimals += "<ul>";
+            for(let i=0; i<animals.length; i++) {
+                htmlAnimals += "<li>" + animals[i].name + " / " + animals[i].comment  + " / " + animals[i].genre + "</li>"
+            }
+            htmlAnimals += "</ul>";
+        }
+
         let idDB = data[i].id;
         let active = data[i].active;
         let role = data[i].role.label;
@@ -425,8 +455,9 @@ function displayUserList(data) {
         + idDB + ', "'
         + usernameDB + '", "'
         + active + '", "'
-        + roleValue
-        + "\")'><p class='p_button_little'>Editer</p></span>";
+        + roleValue + '", "'
+        + animalsString + '"'
+        + ")'><p class='p_button_little'>Editer</p></span>";
         if(isUserLogged) {
             buttonHtml = "<span class='button_little_disabled'><p class='p_button_little'>Supprimer</p></span>"
             + "<span class='button_little_disabled'><p class='p_button_little'>Editer</p></span>";
@@ -439,7 +470,11 @@ function displayUserList(data) {
         + "</span> : <span class=\"" + classNameRole + "\">" + roleValue 
         + "</span>" 
         + buttonHtml
-        + "</article></li>";
+        //********************************************************* ajouter animals ici? */
+        
+        + "</article>" 
+        + htmlAnimals
+        + "</li>";
         //console.log(string);
     }
     string += "</ul>";
