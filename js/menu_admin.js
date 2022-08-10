@@ -77,8 +77,6 @@ function editUser(idDB, usernameDB, activeDB, roleDB, animalsString) { //, anima
         + '<input class="input" type="text" id="password_edit" name="password">'
         + '</div>';
         html += htmlAnimals;
-
-
         html +='<div class="champ_form" id="champ_active">'
         + '<label for="active">Active</label>'
         + '<input type= "radio" class="radio_user_add" id="true_radio_edit" name="active_edit" value="true" checked><span class= "text_radio_user_add">Oui</span>'
