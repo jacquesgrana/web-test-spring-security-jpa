@@ -319,6 +319,21 @@ input:hover {
     font-family: "Roboto condensed regular";
 }
 
+.ul_animals_list_user {
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    
+    padding-bottom: 1rem;
+}
+
+.li_animals_list_user {
+    font-size: 10pt;
+    font-family: "Roboto condensed regular";
+    color : rgb(252, 200, 31);
+    height: 1.2rem;
+}
+
 .red_text {
     color: red;
 }
