@@ -8,8 +8,10 @@ var isAnimalListLoaded = false;
 var isAddAnimalVisible = false;
 
 var dataAnimalList;
+// ajouter var dateAnimalTypeList;
 
 function init() {
+    // TODO ajouter requete pour charger la liste des types des animaux
     usernameElement = document.getElementById("span_username");
     tokenElement = document.getElementById("p_token");
     usernameElement.innerText = username;
@@ -44,7 +46,7 @@ function displayAddAnimal() {
     let divBlocAnimalAddElt = document.getElementById("bloc_animal_add");
     if (!isAddAnimalVisible) {
 
-        divBlocAnimalAddElt.innerHTML = "<p>Test ok</p>";
+        divBlocAnimalAddElt.innerHTML = getAddAnimalDivHtml();
         isAddAnimalVisible = true;
     }
     else {
@@ -66,7 +68,7 @@ function doRequestAnimalListAndDisplay() {
                 displayAnimalList(dataAnimalList);
                 //return data;
             })
-            .catch(err => {window.location.href="../html/error.html";}) // window.location.href="../html/error.html"; *************************************************************************
+            .catch(err => {window.location.href="../html/error.html";})
             ;
 }
 
@@ -81,10 +83,46 @@ function displayAnimalList(data) {
         + "<span class='orange_2_text'>" + data[i].animalType.label + "</span> / " 
         + "<span class='white_text'>" + data[i].genre.toLowerCase() + "</span> / " 
         + "<span class='orange_2_text'>" + data[i].comment + "</span></li>"
-      ;
+        ;
     }
     html += "</ul>";
-    console.log("data 2 : " + data);
+    //console.log("data 2 : " + data);
     element.innerHTML = html;
+}
+
+function getAddAnimalDivHtml() {
+    let html = "";
+    let htmlSelectType = "<select name='type' id='select_type'>"
+    + "<option class='option_select_type' value =1>Chat</option>"
+    + "<option class='option_select_type' value =2>Chien</option>"
+    + "<option class='option_select_type' value =3>Poisson</option>"
+    + "</select>";
+    ;
+    html += "<form id='form_user_add'>"
+        + '<div class="champ_form" id="champ_name">'
+        + '<label for="name">Name</label>'
+        + '<input class="input" type="text" id="name" name="name">'
+        + '</div>'
+        + '<div class="champ_form" id="champ_type">'
+        + '<label for="type">Type</label>'
+        + htmlSelectType
+        + '</div>'
+        // ajouter choix animal type (faire requête en début de fonction)
+        + '<div class="champ_form" id="genre">'
+        + '<label for="genre">Genre</label>'
+        + '<input type= "radio" class="radio_user_add" name="genre" value="MALE" checked><span class= "text_radio_user_add">Mâle</span>'
+        + '<input type= "radio" class="radio_user_add" name="genre" value="FEMALE"><span class= "text_radio_user_add">Femelle</span>'
+        + '</div>'
+        + '<div class="champ_form" id="champ_comment">'
+        + '<label for="comment">Comment</label>'
+        + '<input class="input" type="text" id="comment" name="comment">'
+        + '</div>'
+        + '<div class="champ_form" id="bloc_button_user_add">'
+        + '<button class="button" type="button" onclick="createUserRequest()">Créer animal</button>'
+        + '<button class="button" type="reset">Effacer</button>'
+        + '</div>';
+
+    html += "</form>";
+    return html;
 }
 

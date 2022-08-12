@@ -201,6 +201,7 @@ body {
 .text_radio_user_add {
     padding-top: 0.3rem;
     display: inline;
+    color: rgb(252, 200, 31);
 }
 
 #bloc_button_user_add, 
@@ -208,6 +209,23 @@ body {
     display: flex;
     justify-content: space-between;
     margin-top: -0.6rem;
+}
+
+#select_type {
+    margin-left: 1rem; 
+   min-height: 1.6rem;
+   background-color: rgb(40, 73, 133);
+   border-radius: 0.5rem;
+    border: 1px solid rgb(84, 138, 238);
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    color: rgb(252, 200, 31);
+}
+
+.option_select_type {
+    color: rgb(252, 200, 31);
 }
 
 input {
