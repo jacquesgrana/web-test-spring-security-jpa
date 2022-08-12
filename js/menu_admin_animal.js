@@ -8,16 +8,19 @@ var isAnimalListLoaded = false;
 var isAddAnimalVisible = false;
 
 var dataAnimalList;
-// ajouter var dateAnimalTypeList;
+var dataAnimalTypeList;
+
+// TODO medifier texte des boutons selon les cas !!
 
 function init() {
-    // TODO ajouter requete pour charger la liste des types des animaux
+    doRequestAnimalTypeList();
+    //console.log("data animal type : " + JSON.stringify(dataAnimalTypeList));
     usernameElement = document.getElementById("span_username");
     tokenElement = document.getElementById("p_token");
     usernameElement.innerText = username;
     tokenElement.innerText = token;
-    console.log("username :", username);
-    console.log("token :", token);
+    //console.log("username :", username);
+    //console.log("token :", token);
 }
 
 function requestAndDisplayAnimalList() {
@@ -53,6 +56,104 @@ function displayAddAnimal() {
         divBlocAnimalAddElt.innerHTML = "";
         isAddAnimalVisible = false;
     }
+}
+
+function doRequestAnimalTypeList() {
+    fetch("http://localhost:8090/api/animaltype/all", {
+            method: "GET",
+            headers: { 'Authorization': 'Bearer ' + token },
+            //headers: {"Content-Type": "application/json"},  
+            })
+            .then(res => res.json())
+            .then(data => {
+                //console.log("data animal type : " + JSON.stringify(data));
+                dataAnimalTypeList = data;
+            })
+            .catch(err => {window.location.href="../html/error.html";})
+            ;
+}
+
+function doRequestCreateAnimal() {
+    let nameElement = document.getElementById("name");
+    let commentElement = document.getElementById("comment");
+    let genreElement = document.querySelector('input[name="genre"]:checked');
+    let typeElement = document.getElementById("select_type");
+    let birthElement = document.getElementById("birth");
+    
+    let nameValue = nameElement.value;
+    let commentValue = commentElement.value;
+    let genreValue = genreElement.value;
+    let typeNonFormatted = typeElement.options[typeElement.selectedIndex].value;
+    let typeId = parseInt(typeNonFormatted, 10);
+    let typeValue = getAnimalTypeLabelFromId(typeId);
+    
+    let birthValue = birthElement.value;
+
+    // recuperer index et libelle du type
+    console.log("nameValue", nameValue);
+    console.log("commentValue", commentValue);
+    console.log("genreValue", genreValue);
+    console.log("typeId", typeId);
+    console.log("birthValue", birthValue);
+    console.log("typeValue", typeValue);
+
+
+
+    /*
+    {
+    "animalType": {
+            "id": 1,
+            "label": "Chat"
+        },
+        "name": "tito",
+        "comment": "Chat seul",
+        "genre": "MALE",
+        "birth": "2018-04-12"
+  }
+    */
+
+  const typeContent = {
+    id: typeId,
+    label: typeValue
+};
+
+// TODO modifier create et update pour la liste animals
+const contentHeader = {
+    animalType: typeContent,
+    name: nameValue,
+    comment: commentValue,
+    genre: genreValue,
+    birth: birthValue
+};
+
+fetch("http://localhost:8090/api/animal/create", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + token
+        },
+        //headers: {"Content-Type": "application/json"},  
+        body: JSON.stringify(contentHeader)
+    })
+    .then(res => {
+        
+        isAnimalListLoaded = false;
+        let divBlocAnimalListElt = document.getElementById("bloc_animal_list");
+        divBlocAnimalListElt.innerHTML = "";
+        isAnimalListVisible = false;
+        let divBlocAnimalAddElt = document.getElementById("bloc_animal_add");
+        divBlocAnimalAddElt.innerHTML = "";
+        isAddAnimalVisible = false;
+        
+        alert("Ajout animal ok : " + res.ok);
+
+    })
+    .catch(err => {
+        //console.log('erreur requete : ' + err);
+        window.location.href="../html/error.html";
+    })
+    ;
+
 }
 
 function doRequestAnimalListAndDisplay() {
@@ -92,17 +193,26 @@ function displayAnimalList(data) {
 
 function getAddAnimalDivHtml() {
     let html = "";
-    let htmlSelectType = "<select name='type' id='select_type'>"
-    + "<option class='option_select_type' value =1>Chat</option>"
-    + "<option class='option_select_type' value =2>Chien</option>"
-    + "<option class='option_select_type' value =3>Poisson</option>"
-    + "</select>";
+    let htmlSelectType = "<select name='type' id='select_type'>";
+    for(let i=0; i<dataAnimalTypeList.length; i++) {
+        htmlSelectType += "<option class='option_select_type' value ='" + dataAnimalTypeList[i].id + "'>";
+        htmlSelectType += dataAnimalTypeList[i].label;
+        htmlSelectType += "</option>";
+    }
+
+    htmlSelectType += "</select>";
     ;
     html += "<form id='form_user_add'>"
         + '<div class="champ_form" id="champ_name">'
         + '<label for="name">Name</label>'
         + '<input class="input" type="text" id="name" name="name">'
         + '</div>'
+
+        + '<div class="champ_form" id="champ_birth">'
+        + '<label for="birth">Birth</label>'
+        + '<input class="input" type="date" id="birth" name="birth">'
+        + '</div>'
+
         + '<div class="champ_form" id="champ_type">'
         + '<label for="type">Type</label>'
         + htmlSelectType
@@ -118,7 +228,7 @@ function getAddAnimalDivHtml() {
         + '<input class="input" type="text" id="comment" name="comment">'
         + '</div>'
         + '<div class="champ_form" id="bloc_button_user_add">'
-        + '<button class="button" type="button" onclick="createUserRequest()">Créer animal</button>'
+        + '<button class="button" type="button" onclick="doRequestCreateAnimal()">Créer animal</button>'
         + '<button class="button" type="reset">Effacer</button>'
         + '</div>';
 
@@ -126,3 +236,8 @@ function getAddAnimalDivHtml() {
     return html;
 }
 
+function getAnimalTypeLabelFromId(typeId) {
+    let libelle = "";
+    libelle = dataAnimalTypeList.filter(t => t.id == typeId).map(t => t.label)[0];
+    return libelle;
+}

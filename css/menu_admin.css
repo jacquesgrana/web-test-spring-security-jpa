@@ -8,6 +8,12 @@
     src: url("../font/Roboto_Condensed/RobotoCondensed-Bold.ttf") format("truetype");
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 h2, h3, h4 {
     color: rgb(255, 255, 255);
     margin: auto;
@@ -212,10 +218,12 @@ body {
 }
 
 #select_type {
+    
+    /*appearance: none;*/
     margin-left: 1rem; 
-   min-height: 1.6rem;
-   background-color: rgb(40, 73, 133);
-   border-radius: 0.5rem;
+    min-height: 1.6rem;
+    background-color: rgb(40, 73, 133);
+    border-radius: 0.5rem;
     border: 1px solid rgb(84, 138, 238);
     padding-top: 0.3rem;
     padding-bottom: 0.3rem;
@@ -225,7 +233,13 @@ body {
 }
 
 .option_select_type {
+    
+    font-size: 12pt;
+    font-family: "Roboto condensed regular";
     color: rgb(252, 200, 31);
+    margin-left: 1rem; 
+    min-height: 1.6rem;
+    background-color: rgb(40, 73, 133);
 }
 
 input {
