@@ -292,7 +292,9 @@ input:hover {
     margin-top: 0.5rem;
 }
 
-#result {
+#result, 
+#bloc_animal_list,
+#bloc_animal_add {
     width: 27rem;
     margin-top: 1rem;
     
@@ -303,7 +305,8 @@ input:hover {
     margin-bottom: 1rem;
 }
 
-#result li {
+#result li,
+#bloc_animal_list li {
     width: 23rem;
     list-style: disc;
     color: white;
