@@ -217,11 +217,12 @@ body {
     margin-top: -0.6rem;
 }
 
-#select_type {
-    
+#select_type,
+#select_user {
     /*appearance: none;*/
     margin-left: 1rem; 
     min-height: 1.6rem;
+    width: 10rem;
     background-color: rgb(40, 73, 133);
     border-radius: 0.5rem;
     border: 1px solid rgb(84, 138, 238);
@@ -232,8 +233,8 @@ body {
     color: rgb(252, 200, 31);
 }
 
-.option_select_type {
-    
+.option_select_type,
+.option_select_user {
     font-size: 12pt;
     font-family: "Roboto condensed regular";
     color: rgb(252, 200, 31);
@@ -260,13 +261,14 @@ input:hover {
     border: 1px solid rgb(255, 255, 255);
 }
 
-#bloc_user_edit {
+#bloc_user_edit,
+#bloc_animal_edit {
     display: flex;
     flex-direction: column;
     align-items:flex-start;
     width: 27rem;
     margin-top: 0rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     background-color: rgb(19, 59, 133);
     border-radius: 0.25rem;
     font-size: 12pt;
@@ -337,7 +339,7 @@ input:hover {
     margin-bottom: 1rem;
 }
 
-#result li,
+.li_user_list,
 #bloc_animal_list li {
     width: 23rem;
     list-style: disc;
@@ -363,10 +365,14 @@ input:hover {
 }
 
 .li_animals_list_user {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     font-size: 10pt;
     font-family: "Roboto condensed regular";
     color : rgb(252, 200, 31);
     height: 1.2rem;
+    width: 20rem;
 }
 
 .red_text {

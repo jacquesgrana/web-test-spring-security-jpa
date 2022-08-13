@@ -462,7 +462,7 @@ function displayUserList(data) {
                 + "<span class='white_text'>" + animals[i].name + "</span> / " 
                 + "<span class='orange_2_text'>" + animals[i].animalType.label + "</span> / " 
                 + "<span class='white_text'>" + animals[i].genre.toLowerCase() + "</span> / " 
-                + "<span class='orange_2_text'>" + animals[i].comment + "</span></li>"
+                + "<span class='orange_2_text'>" + animals[i].comment + "</span></li>";
             }
             htmlAnimals += "</ul>";
         }
@@ -490,7 +490,7 @@ function displayUserList(data) {
             classNameUsername = "orange_text";
         }
 
-        string += "<li><article id='article_user_list'>" + idDB 
+        string += "<li class='li_user_list'><article id='article_user_list'>" + idDB 
         + " : <span class='" + classNameUsername + "'>" + usernameDB 
         + "</span> : <span class=\"" + classNameActive + "\">" + active 
         + "</span> : <span class=\"" + classNameRole + "\">" + roleValue 
